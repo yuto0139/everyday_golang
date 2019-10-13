@@ -1,8 +1,11 @@
 package main
 
 import (
+	"bytes"
 	"context"
 	"fmt"
+	"io/ioutil"
+	"log"
 	"regexp"
 	"sort"
 	"time"
@@ -126,4 +129,20 @@ CTXLOOP:
 		}
 	}
 	fmt.Println("###########")
+
+	// 72. ioutil
+	// ファイルなどの入出力(IO)関係に特化 <-> OS open
+	content, err := ioutil.ReadFile("package/package.go")
+	if err != nil {
+		log.Fatalln(err)
+	}
+	fmt.Println(string(content))
+
+	if err := ioutil.WriteFile("ioutil_temp.go", content, 0666); err != nil {
+		log.Fatalln(err)
+	}
+	// ネットワークなどから来たデータをNewBufferで一時記憶
+	r3 := bytes.NewBuffer([]byte("abc"))
+	content2, _ := ioutil.ReadAll(r3)
+	fmt.Println(string(content2))
 }
