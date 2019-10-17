@@ -10,8 +10,8 @@ import (
 	"sort"
 	"time"
 
-	"../mylib"
-	"../mylib/under"
+	"../../mylib"
+	"../../mylib/under"
 )
 
 const (
@@ -132,7 +132,7 @@ CTXLOOP:
 
 	// 72. ioutil
 	// ファイルなどの入出力(IO)関係に特化 <-> OS open
-	content, err := ioutil.ReadFile("package/package.go")
+	content, err := ioutil.ReadFile("package/standard/package.go")
 	if err != nil {
 		log.Fatalln(err)
 	}
