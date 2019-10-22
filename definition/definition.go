@@ -29,19 +29,22 @@ func cal(price, item int) (result int) {
 	return
 }
 
+// 関数mainから実行が開始されると定められている -> エントリーポイント
 func main() {
 	// 8.変数宣言
 	bazz()
 	fmt.Println("Hello world!", time.Now())
 	fmt.Println(user.Current())
+	// 型推論が行われ、型指定が不要
 	var (
-		i    int     = 1
-		f64  float64 = 1.2
-		s    string  = "test"
-		t, f bool    = true, false
+		i    = 1
+		f64  = 1.2
+		s    = "test"
+		t, f = true, false
 	)
 	fmt.Println(i, f64, s, t, f)
 
+	// 関数定義の外部に定義された変数は、同一パッケージであればどこでも参照可 -> パッケージ変数
 	xi := 1
 	xi = 2
 	xf64 := 1.2
@@ -54,8 +57,10 @@ func main() {
 	// 9.定数宣言
 	const Pi = 3.14
 	const (
+		// 型なし定数
 		Username = "test_user"
-		Password = "test_pass"
+		// 型あり定数
+		Password string = "test_pass"
 	)
 
 	fmt.Println(Pi, Username, Password)
@@ -73,7 +78,7 @@ func main() {
 	// 11.文字列型
 	fmt.Println("Hello World!")
 
-	var ss string = "Hello World!"
+	var ss = "Hello World!"
 	ss = strings.Replace(ss, "H", "X", 1)
 	fmt.Println(ss)
 
@@ -88,13 +93,13 @@ func main() {
 	fmt.Printf("%T %v\new", ff, ff)
 
 	// 13.型変換
-	var xx int = 1
+	var xx = 1
 	xxx := float64(xx)
 	fmt.Printf("%T %v %f\n", xxx, xxx, xxx)
 
 	// strcov 文字列の型変更のライブラリ
 	// Atoi ascii to integer
-	var sss string = "14"
+	var sss = "14"
 	i, _ = strconv.Atoi(sss)
 	fmt.Printf("%T %v\n", i, i)
 
@@ -104,7 +109,7 @@ func main() {
 	a[1] = 200
 	fmt.Println(a)
 
-	var b [2]int = [2]int{100, 200}
+	var b = [2]int{100, 200}
 	// b = append(b, 300)
 	fmt.Println(b)
 

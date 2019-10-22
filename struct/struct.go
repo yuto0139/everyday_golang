@@ -2,12 +2,13 @@ package main
 
 import "fmt"
 
-// Vertex ...
+// Vertex ... 構造体を定義
 type Vertex struct {
+	// フィールド
 	x, y int
 }
 
-// Area ... 値レシーバー シンプルに値を渡す
+// Area ... レシーバーで構造体とメソッドを紐付け シンプルに値を渡す
 func (v Vertex) Area() int {
 	return v.x * v.y
 }
@@ -18,6 +19,8 @@ func (v Vertex) Area() int {
 // }
 
 // Scale ...ポインタレシーバー structの中身を変更可能
+// デフォルトではVertexには値渡し(コピー)でメソッドに渡される
+// *をつけることで参照渡しになる
 func (v *Vertex) Scale(i int) {
 	v.x = v.x * i
 	v.y = v.y * i
@@ -75,7 +78,7 @@ func (p *Person) Say() string {
 }
 
 // DriveCar ...
-// Humanインターフェースで指定したメソッドsay()を実装する必要がある -> 型に近い
+// Humanインターフェースで指定したメソッドsay()を実装する必要あり
 func DriveCar(human Human) {
 	if human.Say() == "Mr.Mike" {
 		fmt.Println("Run")
@@ -85,7 +88,8 @@ func DriveCar(human Human) {
 }
 
 func do1(i interface{}) {
-	// Type Assertion 型の上書き
+	// inteface型は全ての型と互換性を持つ
+	// 使用するには、型の上書きをする必要がある -> Type Assertion
 	ii := i.(int)
 	ii *= 2
 	fmt.Println(ii)
@@ -133,6 +137,7 @@ func main() {
 	// fmt.Println(Area(v))
 
 	// 40. コンストラクタ
+	// 他のパッケージからstructのインスタンスを生成するときは、Newを使用
 	v := New(3, 4, 5)
 	v.Scale(10)
 	fmt.Println(v.Area())
@@ -159,6 +164,7 @@ func main() {
 	do2(true)
 
 	// 45. Stringer
+	// 出力方法(文字列)を変更可能 mark, 22 -> "My name is Mike
 	mark := Person{"Mark", 22}
 	fmt.Println(mark)
 

@@ -25,15 +25,14 @@ func changeVertex2(v *Vertex) {
 
 func main() {
 	// 34. ポインタ
-	// var p *int = &nでの&nで、nのMemoryのAddressを出力
-	// また、Addressを代入するのに、ポイント型 *intにする
-	// 対して、fmt.Println(*p)での*pで、nのAddressのMemoryを出力
+	// 任意の型のアドレスを保持するポインタの性質を利用して、関数の引数へ値型の参照渡し
+	// ポインタ型にするには、1. 型宣言の前に*を置いて定義 or 2. 変数名の前に&
 	var n = 100
 	one(&n)
 	fmt.Println(n)
 
 	// 35. newとmakeの違い
-	// new(int)でメモリの領域を確保 → アドレスを返す
+	// 値を入れない状態でメモリの領域を確保したいとき、new(int)を使用
 	var p = new(int)
 	fmt.Println(*p)
 	*p++

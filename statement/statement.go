@@ -71,7 +71,7 @@ func main() {
 	for i := 0; i < len(l); i++ {
 		fmt.Println(i, l[i])
 	}
-	// rangeを使えば、よしなに配列lからi, vへ代入してくれる
+	// 要素分だけ何らかの処理を繰り返し実行
 	for i, v := range l {
 		fmt.Println(i, v)
 	}
@@ -94,7 +94,7 @@ func main() {
 	}
 
 	// 27. switch文
-	// 省略記法
+	// 省略記法 (変数osをswitch文の外へ使わない場合)
 	switch os := getOsName(); os {
 	case "mac":
 		fmt.Println("Mac!!")
