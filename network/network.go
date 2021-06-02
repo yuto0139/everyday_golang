@@ -67,15 +67,13 @@ func Server(apiKey, sign string, data []byte) {
 }
 
 func main() {
-	// 関数http.GetにURLを表す文字列を渡すだけで簡単にGETメソッドを実行
 	resp, _ := http.Get("http://example.com")
 	defer resp.Body.Close()
 	body, _ := ioutil.ReadAll(resp.Body)
 	fmt.Println(string(body))
 
-	// Parseを使って、プログラム上で正しいURLかどうか認証
-	base, err := url.Parse("https://example.com/")
-	fmt.Println(base, err)
+	// Parseを使って、正しいURLかどうか認証
+	base, _ := url.Parse("https://example.com/")
 	reference, _ := url.Parse("/test?a=1&b=2")
 
 	// ResolveReferenceを使って、エンドポイントを含むURLを生成
@@ -83,29 +81,21 @@ func main() {
 	fmt.Println(base)
 	fmt.Println(endpoint)
 
-	// ここからヘッダーやクエリを付け加えて、GET.POSTメソッドを実行する場合
-	// GETの場合 -> http.NewRequest("Get", endpoint, nil)
+	// req, _ := http.NewRequest("Get", endpoint, nil)
 	req, _ := http.NewRequest("POST", endpoint, bytes.NewBuffer([]byte("password")))
-	// 作成したhttpリクエストに対して、ヘッダー情報を追加
 	req.Header.Add("If-None-Match", `W/"xyz"`)
-	// URLのクエリ情報を取得 -> ?a=1&b=2
 	q := req.URL.Query()
-	// クエリ情報の追加
 	q.Add("c", "3&%")
 	fmt.Println(q)
 	fmt.Println(q.Encode())
-	// エンコードしたクエリ情報で、元のクエリ情報を書き換え
 	req.URL.RawQuery = q.Encode()
 
-	// 実際にアクセスするときは、clientを作成する必要あり
 	var client *http.Client = &http.Client{}
-	// ここでついにURLにアクセス
 	resp2, _ := client.Do(req)
 	body2, _ := ioutil.ReadAll(resp2.Body)
 	fmt.Println(string(body2))
 
 	// 74. json.UnmarshalとMarshalとエンコード
-	// 受け取ったjsonのデータを指定のstruct型へ流し込み
 	b := []byte(`{"name": "mike", "age": 0, "nicknames": ["a", "b", "c"]}`)
 	var p Person
 	// Unmarshalを使ってjsonからstructのkeyに合った値を入力

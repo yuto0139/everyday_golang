@@ -18,7 +18,7 @@ func (v Vertex) Area() int {
 // 	return v.x * v.y
 // }
 
-// Scale ...ポインタレシーバ structの中身を変更可能 <-> 値レシーバ
+// Scale ...ポインタレシーバー structの中身を変更可能
 // デフォルトではVertexには値渡し(コピー)でメソッドに渡される
 // *をつけることで参照渡しになる
 func (v *Vertex) Scale(i int) {
